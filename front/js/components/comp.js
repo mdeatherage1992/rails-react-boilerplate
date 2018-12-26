@@ -6,7 +6,7 @@ import React from 'react';
 
 import { TimestampContext } from './TimestampProvider';
 
-export default class Timestamp extends React.Component {
+export default class Comp extends React.Component {
   static contextType = TimestampContext;
 
   componentDidMount() {
@@ -15,6 +15,7 @@ export default class Timestamp extends React.Component {
 
   fetchTimestamp = () => {
     const { fetchTimestamp } = this.context;
+
     fetchTimestamp();
   };
 

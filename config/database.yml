@@ -17,13 +17,14 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: localhost
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: rails-react-bp-dev
+  database: root1
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rails-react-bp-test
+  database: root1
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -77,9 +78,25 @@ test:
 #
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
+
+# CREATE TABLE strains (
+#     strain_id bigserial primary key,
+#     strain_name varchar(20) NOT NULL,
+#     strain_feeling varchar(20) NOT NULL,
+#     strain_batches text[],
+#     strain_notes text[],
+#     date_added timestamp default NULL
+# );
+# CREATE TABLE batches (
+#     batch_id bigserial primary key,
+#     batch_name varchar(20) NOT NULL,
+#     batch_int varchar(20) NOT NULL,
+#     batch_notes text[],
+#     date_added timestamp default NULL
+# );
 #
 production:
   <<: *default
-  database: rails-react-bp-prod
+  database: root1
   username: rails-react-boilerplate
   password: <%= ENV['RAILS-REACT-BOILERPLATE_DATABASE_PASSWORD'] %>

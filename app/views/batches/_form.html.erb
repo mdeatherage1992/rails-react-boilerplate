@@ -1,0 +1,33 @@
+<%= form_for(@batch) do |f| %>
+  <% if @batch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@batch.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :batch_name %><br>
+    <%= f.text_field :batch_name %>
+  </div>
+  <div class="field">
+    <%= f.label :batch_int %><br>
+    <%= f.text_field :batch_int %>
+  </div>
+  <div class="field">
+    <%= f.label :batch_mea %><br>
+    <%= f.text_area :batch_mea %>
+  </div>
+  <div class="field">
+    <%= f.label :batch_notes %><br>
+    <%= f.text_field :batch_notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

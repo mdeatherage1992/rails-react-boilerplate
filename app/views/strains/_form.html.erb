@@ -1,0 +1,38 @@
+<%= form_for(@strain) do |f| %>
+  <% if @strain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@strain.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @strain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :strain_name %><br>
+    <%= f.text_field :strain_name %>
+  </div>
+  <div class="field">
+    <%= f.label :strain_feeling %><br>
+    <%= f.text_field :strain_feeling %>
+  </div>
+  <div class="field">
+    <%= f.label :strain_rating %><br>
+    <%= f.text_area :strain_rating %>
+  </div>
+
+  <div class="field">
+    <%= f.label :strain_notes %><br>
+    <%= f.text_field :strain_notes %>
+  </div>
+  <div class="field">
+    <%= f.label :strain_batches %><br>
+    <%= f.text_field :strain_batches %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

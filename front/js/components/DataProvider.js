@@ -8,31 +8,31 @@ import axios from 'axios';
 
 import getLogger from '../utils/logger';
 
-const log = getLogger('TimestampContext');
+const log = getLogger('ModelContext');
 
-export const TimestampContext = React.createContext({
-  timestamp: null,
-  fetchTimestamp: () => {},
+export const ModelContext = React.createContext({
+  model: null,
+  fetchModels: () => {},
 });
 
-export default class TimestampProvider extends PureComponent {
+export default class ModelProvider extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
   };
 
   state = {
     // eslint-disable-next-line react/no-unused-state
-    timestamp: null,
+    model: null,
     // eslint-disable-next-line react/no-unused-state
-    fetchTimestamp: () => this.fetchTimestamp(),
+    fetchModels: () => this.fetchModels(),
   };
 
-  fetchTimestamp = async () => {
+  fetchModels = async () => {
     try {
-      const res = await axios.get('/home/timestamp');
+      const res = await axios.get('http://www.localhost:3000/api/strains');
 
       this.setState(() => ({
-        timestamp: res.data,
+        models: res,
       }));
     } catch (error) {
       log.error(error);
@@ -43,9 +43,9 @@ export default class TimestampProvider extends PureComponent {
     const { children } = this.props;
 
     return (
-      <TimestampContext.Provider value={this.state}>
+      <ModelContext.Provider value={this.state}>
         {children}
-      </TimestampContext.Provider>
+      </ModelContext.Provider>
     );
   }
 }

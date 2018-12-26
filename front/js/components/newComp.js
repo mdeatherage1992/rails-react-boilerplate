@@ -1,21 +1,17 @@
-/**
- * @file TimestampProvider component.
- */
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import getLogger from '../utils/logger';
 
-const log = getLogger('TimestampContext');
+const log = getLogger('NewCompContext');
 
-export const TimestampContext = React.createContext({
+export const NewCompContext = React.createContext({
   timestamp: null,
-  fetchTimestamp: () => {},
+  data: () => {},
 });
 
-export default class TimestampProvider extends PureComponent {
+export default class NewComp extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
   };
@@ -24,15 +20,15 @@ export default class TimestampProvider extends PureComponent {
     // eslint-disable-next-line react/no-unused-state
     timestamp: null,
     // eslint-disable-next-line react/no-unused-state
-    fetchTimestamp: () => this.fetchTimestamp(),
+    data: () => this.data(),
   };
 
-  fetchTimestamp = async () => {
+  data = async () => {
     try {
-      const res = await axios.get('/home/timestamp');
+      const res = await axios.get('/strains');
 
       this.setState(() => ({
-        timestamp: res.data,
+        data: res.data,
       }));
     } catch (error) {
       log.error(error);
@@ -43,9 +39,9 @@ export default class TimestampProvider extends PureComponent {
     const { children } = this.props;
 
     return (
-      <TimestampContext.Provider value={this.state}>
+      <NewCompContext.Provider value={this.state}>
         {children}
-      </TimestampContext.Provider>
+      </NewCompContext.Provider>
     );
   }
 }
